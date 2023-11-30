@@ -48,6 +48,13 @@ module.exports={
     },
     async register(req,res){
         const{email,password,name,alamat,job_role}=req.body;
+        // console.log(!Number.isInteger(password));
+        if(password.length>6 || !Number.isInteger(password)){
+            return res.status(400).json({
+                status:"Fail!",
+                message:"Password harus kurang dari 6 dan bertipe numeric!"
+            })
+        }
         const user= await prisma.user.findFirst({
             where:{email}
         })
