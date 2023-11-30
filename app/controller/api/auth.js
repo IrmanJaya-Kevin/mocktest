@@ -73,5 +73,61 @@ module.exports={
             message:'Berhasil Register!',
             data:createUser
         })
+    },
+    registerPageForm: async (req,res,next)=>{
+        try {
+            const{email,password,name,job_role,alamat}=req.body;
+            const user= await prisma.user.findFirst({
+                where:{email}
+            })
+            if(user){
+               return res.redirect('/register')
+            }
+    
+            const createUser=await prisma.user.create({
+                data:{
+                    email,
+                    name,
+                    alamat,
+                    job_role,
+                    password: await encryptPassword(password)
+                }
+            })
+    
+           
+            return res.redirect('/login')
+        } catch (error) {
+            next(error)
+        }
+       
+    },
+    async loginPageForm(req,res,next){
+     
+        const {email,password}=req.body
+
+        const user=await prisma.user.findFirst({
+            where:{email}
+        })
+        if(!user){
+            return res.redirect('/login')
+        }
+        const isPasswordCorrect=await checkPassword(
+            password,user.password
+        )
+        if(!isPasswordCorrect){
+            return res.redirect('/login')
+        }
+
+        delete user.password
+        const token=await JWTsign(user)
+        req.data=user
+        // console.log(req.data.id)
+        req.userListData=await prisma.list.findMany({
+            where: {
+                userId: +req.data.id,
+            }
+        })
+        next()
+
     }
 }

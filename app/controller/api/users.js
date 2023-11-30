@@ -31,7 +31,7 @@ module.exports = {
                 id: +req.params.userId,
             },
             include:{
-                profile:true
+                list:true
             }
         })
   

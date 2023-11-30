@@ -17,4 +17,12 @@ model User{
   password String
   alamat String?
   job_role String?
+  list List[]
+}
+model List{
+  id Int @id @default(autoincrement())
+  to_do String
+  status String
+  user User @relation(fields: [userId],references:[id])
+  userId Int
 }

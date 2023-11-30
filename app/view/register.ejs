@@ -1,0 +1,32 @@
+<h2>Register</h2>
+<form action="/register" method="post">
+    <div>
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <div>
+        <label for="alamat">Alamat</label>
+        <input type="text" name="alamat" id="alamat">
+    </div>
+    <div>
+        <label for="job_role">Job Role</label>
+        <select name="job_role" id="job_role">
+            <option value="Backend Engineer">Backend Engineer</option>
+            <option value="Quality Assurance">Quality Assurance</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Mobile Programmer">Mobile Programmer</option>
+          </select>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" pattern="[0-9]*" inputmode="numeric" minlength="6" maxlength="6" required>
+    </div>
+    <label>Number Only (0-9)</label>
+    <div>
+        <input type="submit" value="Register">
+    </div>
+</form>

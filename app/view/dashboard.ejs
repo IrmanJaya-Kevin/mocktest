@@ -1,0 +1,24 @@
+<h1>Dashboard</h1>
+<h2><%= data.email %></h2>
+<h2><%= data.name %></h2>
+
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+</style>
+<table>
+    <tr>
+      <th>No</th>
+      <th>To Do</th>
+      <th>Status</th>
+    </tr>
+    <% for(let co=0;co<list.length;co++){ %>
+        <tr>
+            <td><%= co+1 %></td>
+            <td><%= list[co].to_do %></td>
+            <td><%= list[co].status %></td>
+         </tr>
+    <% } %>
+   
+  </table>
